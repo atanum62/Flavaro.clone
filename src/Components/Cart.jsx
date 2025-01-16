@@ -59,6 +59,8 @@ const Cart = () => {
         }}
         className="rounded-full bg-white shadow-md text-5xl p-3 fixed lg:bottom-4 lg:right-4 right-1 bottom-5"
       />
+
+      <div></div>
     </>
   );
 };
