@@ -2,7 +2,16 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/slices/cartSlice";
-const Foodcard = ({ id, name, img, desciption, catagory, price, rateing }) => {
+const Foodcard = ({
+  id,
+  name,
+  img,
+  desciption,
+  catagory,
+  price,
+  rateing,
+  handleToast,
+}) => {
   const dispatch = useDispatch();
   return (
     <div className="font-bold w-[250px] bg-white p-5 flex flex-col rounded-lg mx-6 gap-2">
@@ -23,6 +32,7 @@ const Foodcard = ({ id, name, img, desciption, catagory, price, rateing }) => {
         <button
           onClick={() => {
             dispatch(addToCart({ id, name, price, rateing, qty: 1, img }));
+            handleToast(name);
           }}
           className="p-1  bg-gray-200 rounded-lg hover:bg-green-600 hover:text-white"
         >

@@ -2,7 +2,12 @@ import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../redux/slices/cartSlice";
+import {
+  removeFromCart,
+  incrementQty,
+  decrementQty,
+} from "../redux/slices/cartSlice";
+import toast from "react-hot-toast";
 
 const Itemcart = ({ id, name, price, img, qty }) => {
   const dispatch = useDispatch();
@@ -20,18 +25,29 @@ const Itemcart = ({ id, name, price, img, qty }) => {
               {name.length > 20 ? name.slice(0, 20) + "..." : name}
             </h2>
             <MdDelete
-              onClick={() =>
-                dispatch(removeFromCart({ id, name, img, price, qty }))
-              }
+              onClick={() => {
+                dispatch(removeFromCart({ id, name, img, price, qty }));
+                toast(`${name} Removed From Cart! `, {
+                  icon: "👍",
+                });
+              }}
               className="absolute right-7 text-gray-600 cursor-pointer"
             />
           </div>
           <div className="flex  justify-between ">
             <span className="text-green-500 font-bold">₹{price}</span>
             <div className="flex justify-center items-center gap-2 absolute right-7 ">
-              <FaPlus className="border-2 border-gray-600 text-gray-600 hover:text-white hover:bg-green-500 hover:border-none rounded-md p-1 text-xl transition-all ease-linear cursor-pointer" />
+              <FaPlus
+                onClick={() => dispatch(incrementQty({ id }))}
+                className="border-2 border-gray-600 text-gray-600 hover:text-white hover:bg-green-500 hover:border-none rounded-md p-1 text-xl transition-all ease-linear cursor-pointer"
+              />
               <span>{qty}</span>
-              <FaMinus className="border-2 border-gray-600 text-gray-600 hover:text-white hover:bg-green-500 hover:border-none rounded-md p-1 text-xl transition-all ease-linear cursor-pointer " />
+              <FaMinus
+                onClick={() =>
+                  qty > 1 ? dispatch(decrementQty({ id })) : (qty = 0)
+                }
+                className="border-2 border-gray-600 text-gray-600 hover:text-white hover:bg-green-500 hover:border-none rounded-md p-1 text-xl transition-all ease-linear cursor-pointer "
+              />
             </div>
           </div>
         </div>

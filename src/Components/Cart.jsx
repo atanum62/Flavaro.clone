@@ -8,6 +8,11 @@ const Cart = () => {
   const cartItems = useSelector((store) => store.cart.cart);
   // console.log(cartItems);
   const [activeCart, setActiveCart] = useState(false);
+  const totalQty = cartItems.reduce((total, item) => total + item.qty, 0);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.qty * item.price,
+    0
+  );
   return (
     <>
       <div
@@ -45,8 +50,10 @@ const Cart = () => {
         )}
 
         <div className="absolute bottom-0">
-          <h3 className="font-semibold text-gray-800">Items:1</h3>
-          <h3 className="font-semibold text-gray-800">Total Amount:130</h3>
+          <h3 className="font-semibold text-gray-800">Items:{totalQty}</h3>
+          <h3 className="font-semibold text-gray-800">
+            Total Amount:{totalPrice}
+          </h3>
           <hr className="w-[93vw] lg:w-[18.5vw] my-2" />
           <button className="bg-green-500 font-bold text-white p-2 rounded-lg w-[93vw] lg:w-[18.5vw] mb-5">
             Checkout
@@ -57,7 +64,9 @@ const Cart = () => {
         onClick={() => {
           setActiveCart(!activeCart);
         }}
-        className="rounded-full bg-white shadow-md text-5xl p-3 fixed lg:bottom-4 lg:right-4 right-1 bottom-5"
+        className={`rounded-full bg-white shadow-md text-5xl p-3 fixed lg:bottom-4 lg:right-4 right-1 bottom-5 ${
+          totalQty > 0 && "animate-bounce delay-5000 transition-all"
+        }`}
       />
     </>
   );
