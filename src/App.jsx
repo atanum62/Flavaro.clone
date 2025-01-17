@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Success from "./pages/Success";
 import Error from "./pages/Error";
+import ProtectedRoutes from "./Components/ProtectedRoutes";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -11,7 +12,7 @@ const App = () => {
       element: <Home />,
     },
 
-    { path: "/scuess", element: <Success /> },
+    { path: "/scuess", element: <ProtectedRoutes element={<Success />} /> },
     { path: "/*", element: <Error /> },
   ]);
   return <RouterProvider router={router} />;

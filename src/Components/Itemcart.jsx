@@ -27,9 +27,23 @@ const Itemcart = ({ id, name, price, img, qty }) => {
             <MdDelete
               onClick={() => {
                 dispatch(removeFromCart({ id, name, img, price, qty }));
-                toast(`${name} Removed From Cart! `, {
-                  icon: "👍",
-                });
+                // toast(`${name} Removed From Cart! `, {
+                //   icon: "👍",
+                // });
+                toast.custom(
+                  (t) => (
+                    <div
+                      className={`bg-white text-black px-4 py-2 shadow-lg rounded-lg max-w-xs w-full mr-7 transition-all duration-500 ${
+                        t.visible ? "animate-enter" : "animate-leave"
+                      }`}
+                    >
+                      {name} Removed From Cart! 👍
+                    </div>
+                  ),
+                  {
+                    duration: 1000, // Stay on screen for 2 seconds
+                  }
+                );
               }}
               className="absolute right-7 text-gray-600 cursor-pointer"
             />

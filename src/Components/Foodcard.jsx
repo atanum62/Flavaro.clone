@@ -14,7 +14,10 @@ const Foodcard = ({
 }) => {
   const dispatch = useDispatch();
   return (
-    <div className="font-bold w-[250px] bg-white p-5 flex flex-col rounded-lg mx-6 gap-2">
+    <div
+      className="font-bold w-[250px] 
+    bg-white p-5 flex flex-col rounded-lg mx-6 gap-2"
+    >
       <img
         src={img}
         alt={name}
